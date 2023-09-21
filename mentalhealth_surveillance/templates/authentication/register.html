@@ -1,0 +1,54 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+{% block content %}
+
+<div style="display: grid; place-items: center; min-height: 100vh;">
+  <div style="max-width: 400px; width: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px;">
+        <h4 style="text-align: center; margin-bottom: 30px;">Register for a free account</h4>
+
+        <form action="{% url 'register' %}" method="post">
+            {% include 'partials/messages.html' %}
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 25px;">
+                <input 
+                type="text"
+                name="username" 
+                placeholder="Username" 
+                id="usernameField" 
+                value="{{fieldValues.username}}" 
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"/>
+                <div style="color: red; display:none;"></div>
+                <p style="font-size: 0.9em; color: green;"></p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <input 
+                type="email" 
+                name="email" 
+                placeholder="Email" 
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"
+                id="emailField" 
+                value="{{fieldValues.email}}" />
+                <div style="color: red; display:none;"></div>
+            </div>
+
+            <div style="position: relative; margin-bottom: 25px;">
+                <input 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"
+                id="passwordField" />
+                <small style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.8em;">SHOW</small>
+            </div>
+
+            <input type="submit" value="Register" style="width: 100%; padding: 10px; background-color: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'"/>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock content %}
+

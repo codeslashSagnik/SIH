@@ -1,0 +1,70 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  /* Custom styles */
+  .form-group.custom-gap {
+    margin-bottom: 30px; /* Adjust this value as per your desired gap */
+  }
+
+  .showPasswordToggle {
+    font-size: 0.8em; /* Making it smaller */
+    position: absolute; /* Positioning it to the right */
+    right: 10px; /* Adjust this for the distance from the right side */
+    top: 50%; 
+    transform: translateY(-50%);
+    cursor: pointer; /* To vertically center it */
+  }
+
+  .submit-btn {
+    margin-top: 30px; /* Increase gap between password and the login button */
+  }
+
+  /* Add hover effects to the button */
+  .submit-btn:hover {
+    background-color: #0069d9; /* Slightly darker shade of primary color */
+    border-color: #005cbf;
+  }
+</style>
+
+<div style="display: flex; height: 100vh; align-items: center; justify-content: center;">
+    <div style="max-width: 400px; width: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px;">
+        <h4 style="text-align: center; margin-bottom: 30px;">Login to your account</h4>
+        
+        <form action="{% url 'login' %}" method="post">
+            {% include 'partials/messages.html' %}
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 25px;">
+                <input 
+                type="text"
+                name="username" 
+                placeholder="Username" 
+                id="usernameField" 
+                value="{{fieldValues.username}}" 
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"/>
+                <div style="color: red; display:none;"></div>
+                <p style="font-size: 0.9em; color: green;"></p>
+            </div>
+
+            <div style="position: relative; margin-bottom: 25px;">
+                <input 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"
+                id="passwordField" />
+                <small style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.8em;">SHOW</small>
+            </div>
+
+            <input type="submit" value="Login" style="width: 100%; padding: 10px; background-color: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'"/>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/login.js' %}"></script>
+
+{% endblock content %}
+
